@@ -1,17 +1,17 @@
-include = include
+sources = $(wildcard *.cpp)
+headers = $(wildcard *.hpp)
+objects = $(sources:.cpp=.o)
 
-lib/lib3D.a: obj/perspective.o obj/tesselation.o obj/objloading.o
-	touch lib/lib3D.a
-	rm lib/lib3D.a
-	ar -cvq lib/lib3D.a obj/perspective.o obj/tesselation.o obj/objloading.o
+lib3D.a: $(objects) | dependencies.txt
+	rm -f lib3D.a
+	ar -cvq lib3D.a $(objects)
 
-obj/perspective.o: source/perspective.cpp
-	g++ -c source/perspective.cpp -Iinclude -o obj/perspective.o
-obj/tesselation.o: source/tesselation.cpp
-	g++ -c source/tesselation.cpp -Iinclude -o obj/tesselation.o
-obj/objloading.o: source/objloading.cpp
-	g++ -c source/objloading.cpp -Iinclude -o obj/objloading.o
+dependencies.txt: $(headers) $(sources)
+	g++ -MM *.cpp > dependencies.txt
+
+
+include dependencies.txt
+
 	
 clean:
-	rm obj/*.o
-	rm lib/*.a
+	rm -f *.o *.a dependencies.txt

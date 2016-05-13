@@ -4,7 +4,7 @@
 #define tesLines 		1
 #define tesTrianles 	2
 #define tesQuads 		3
-#include <perspective.hpp>
+#include "perspective.hpp"
 #include "X11/Xlib.h"
 
 struct TesselationState {

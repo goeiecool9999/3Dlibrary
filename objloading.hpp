@@ -2,7 +2,7 @@
 #define OBJLOADING_H
 
 #include <string>
-#include <perspective.hpp>
+#include "perspective.hpp"
 
 struct Face {
 	unsigned int *indices;
