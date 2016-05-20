@@ -9,6 +9,11 @@ TDPoint tdPoint(double x, double y, double z) {
 	point.x = x; point.y = y; point.z = z;
 	return point;
 }
+Point point(double x, double y) {
+	Point point;
+	point.x = x; point.y = y;
+	return point;
+}
 
 void scalePoint(TDPoint *point, TDPoint scale) {
 	point->x *= scale.x;

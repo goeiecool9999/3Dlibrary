@@ -28,6 +28,7 @@ void rotateCartesianAroundAxis(TDPoint *point, double angle, int axis);
 void rotateCartesian(Point *point, double angle);
 
 TDPoint tdPoint(double x, double y, double z);
+Point point(double x, double y);
 
 Point projectPointToScreen(TDPoint point, CamParams cam, int width, int height);
 
