@@ -10,7 +10,7 @@ dependencies.txt: $(headers) $(sources)
 	g++ -MM *.cpp > dependencies.txt
 
 
-include dependencies.txt
+-include dependencies.txt
 
 	
 clean:
