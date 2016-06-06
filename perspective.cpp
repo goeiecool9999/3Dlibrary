@@ -70,6 +70,21 @@ void rotateCartesian(Point *point, double angle) {
 	point->y = newY;
 }
 
+void rotateCartesianWithOrigin(Point* point, Point origin, double angle) {
+	point->x -= origin.x;
+	point->y -= origin.y;
+	rotateCartesian(point, angle);
+	point->x += origin.x;
+	point->y += origin.y;
+}
+
+void rotateCartesianWithOriginAroundAxis(TDPoint* point, TDPoint origin, double angle, int axis) {
+	point->x -= origin.x;
+	point->y -= origin.y;
+	rotateCartesianAroundAxis(point, angle, axis);
+	point->x += origin.x;
+	point->y += origin.y;
+}
 
 void camTransform(TDPoint *point, CamParams cam) {
 	//translate	

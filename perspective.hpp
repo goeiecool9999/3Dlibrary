@@ -25,6 +25,9 @@ void translatePoint(TDPoint *point, TDPoint offset);
 
 void rotateCartesianAroundAxis(TDPoint *point, double angle, int axis);
 
+void rotateCartesianWithOrigin(Point* point, Point origin, double angle);
+void rotateCartesianWithOriginAroundAxis(TDPoint* point, TDPoint origin, double angle, int axis);
+
 void rotateCartesian(Point *point, double angle);
 
 TDPoint tdPoint(double x, double y, double z);
