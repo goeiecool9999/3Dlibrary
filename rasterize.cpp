@@ -3,6 +3,34 @@
 #include <X11/Xlib.h>
 #include <iostream>
 
+void sortTriangleByX(int *indices, Point *points) {
+	//sort points from left to right.
+	int left=0,middle=1,right=2;
+	//find points left to right.
+	//compare first and second points.
+	bool greater = points[0].x >= points[1].x;
+	//store largest in right and smallest in middle.
+	middle = greater ? 1 : 0;
+	right = !greater ? 1 : 0;
+	//compare third point to current middle point.
+	if(points[2].x >= points[middle].x) {
+		//if it is greater, store it in middle and move current middle to left
+		left = middle;
+		middle = 2;
+		//since its bigger than the last middle it might also be bigger than the current right.
+		//Check for that and correct accordingly.
+		if(points[2].x >= points[right].x) {
+			middle = right;
+			right = 2;
+		}
+	} else {
+		left = 2;
+	}
+	indices[0] = left;
+	indices[1] = middle;
+	indices[2] = right;
+}
+
 void fillTriangle(DrawContext context, Point* points, unsigned int triangles) {
 	
 	//iterate over all triangles in the points list.
@@ -12,28 +40,11 @@ void fillTriangle(DrawContext context, Point* points, unsigned int triangles) {
 		Point* oldPoints = points;
 		Point points[3] = {oldPoints[index], oldPoints[index+1], oldPoints[index+2]};
 		
-		//sort points from left to right.
-		int left=0,middle=1,right=2;
-		//find points left to right.
-		//compare first and second points.
-		bool greater = points[0].x >= points[1].x;
-		//store largest in right and smallest in middle.
-		middle = greater ? 1 : 0;
-		right = !greater ? 1 : 0;
-		//compare third point to current middle point.
-		if(points[2].x >= points[middle].x) {
-			//if it is greater, store it in middle and move current middle to left
-			left = middle;
-			middle = 2;
-			//since its bigger than the last middle it might also be bigger than the current right.
-			//Check for that and correct accordingly.
-			if(points[2].x >= points[right].x) {
-				middle = right;
-				right = 2;
-			}
-		} else {
-			left = 2;
-		}
+		int indices[3] = {0,0,0};
+		sortTriangleByX(indices, points);
+		int left = indices[0];
+		int middle = indices[1];
+		int right = indices[2];
 		
 		//For this next explanation the leftmost point will be refered to as L.
 		//the rightmost point as R and the middle point as T.
