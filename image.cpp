@@ -5,6 +5,14 @@
 #include <png.h>
 #include <string>
 
+unsigned long getColorFromPixel(int x, int y, Image img) {
+	x %= img.width;
+	y %= img.height;
+	return img.data[y][x*img.bytesperpix] << 16 | 
+			img.data[y][x*img.bytesperpix+1] << 8 | 
+			img.data[y][x*img.bytesperpix+2];
+}
+
 Image loadImageFromJpeg(std::string fileName) {
 	jpeg_decompress_struct decompress;
 	jpeg_error_mgr jerr;

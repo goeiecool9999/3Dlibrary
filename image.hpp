@@ -9,6 +9,8 @@ struct Image {
 	unsigned int width,height,bytesperpix;
 };
 
+unsigned long getColorFromPixel(int x, int y, Image img);
+
 Image loadImageFromJpeg(std::string fileName);
 Image loadImageFromPng(std::string fileName);
 
